@@ -4,7 +4,8 @@
 ;       - To add to control group '1', you hold down 1 key and press XButton2.
 ;       - To add to control group '2', you hold down 2 key and press XButton2.
 ;       - etc.
-;
+; TODO - Main issue is that we can't assume the user will hold down 1/2/3.
+;      - This will un-focus the selected larva + eggs. :(
 
 XButton2::
     ; First grab our control group.
@@ -22,11 +23,12 @@ XButton2::
         Return
 
     ; So now we control-click on the egg at the current cursor position.
-    ControlClick
+    Send {LControl down}
+    Click
+    Send {LControl up}
 
     ; The current selection is now just the correct eggs, so how add them to the
     ; group by sending shift + ControlGroupKey
     Send +{%ControlGroupKey%}
 
     Return
-    
